@@ -1,0 +1,116 @@
+filters:
+  and:
+    - file.inFolder("Bases Row Deltas/Notes")
+formulas:
+  double: reading * 2
+views:
+  - type: bases-row-deltas
+    name: Numbers
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "North"
+    sort:
+      - property: sequence
+        direction: ASC
+  - type: bases-row-deltas
+    name: Groups
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter != "Gap"
+    sort:
+      - property: sequence
+        direction: ASC
+    groupBy:
+      property: meter
+      direction: ASC
+  - type: bases-row-deltas
+    name: Gaps
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "Gap"
+    sort:
+      - property: sequence
+        direction: ASC
+  - type: bases-row-deltas
+    name: Formula
+    deltaNumber: formula.double
+    filters:
+      and:
+        - meter == "North"
+    sort:
+      - property: sequence
+        direction: ASC
+  - type: bases-row-deltas
+    name: Limited
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "North"
+        - sequence > 1
+    limit: 2
+    sort:
+      - property: sequence
+        direction: ASC
+  - type: bases-row-deltas
+    name: Several
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "North"
+    sort:
+      - property: sequence
+        direction: ASC
+    deltaSecond: note.cost
+    deltaThird: formula.double
+  - type: bases-row-deltas
+    name: Offset
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "North"
+    sort:
+      - property: sequence
+        direction: ASC
+    deltaOffset: 2
+  - type: bases-row-deltas
+    name: Per day
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "North"
+    sort:
+      - property: sequence
+        direction: ASC
+    deltaDate: note.day
+  - type: bases-row-deltas
+    name: Manual groups
+    deltaNumber: note.reading
+    sort:
+      - property: sequence
+        direction: ASC
+    groupBy:
+      property: meter
+      direction: ASC
+    groupOrder: [South, North, Gap]
+  - type: bases-row-deltas
+    name: Hidden groups
+    deltaNumber: note.reading
+    sort:
+      - property: sequence
+        direction: ASC
+    groupBy:
+      property: meter
+      direction: ASC
+    groupOrder: [South, North]
+  - type: bases-row-deltas
+    name: Ties
+    deltaNumber: note.reading
+    filters:
+      and:
+        - meter == "North"
+    sort:
+      - property: meter
+        direction: ASC

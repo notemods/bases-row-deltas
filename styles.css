@@ -1,0 +1,51 @@
+.bases-row-deltas {
+	padding: var(--size-4-4);
+	max-width: 100%;
+	min-width: 0;
+	overflow: auto;
+	color: var(--text-normal);
+}
+
+.bases-row-deltas .brd-notice,
+.bases-row-deltas .brd-summary,
+.bases-row-deltas .brd-pro-note {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	margin: 0 0 var(--size-4-3);
+}
+.bases-row-deltas .brd-group { margin-bottom: var(--size-4-5); }
+.bases-row-deltas .brd-group-title { font-weight: var(--font-semibold); }
+
+.bases-row-deltas .brd-scroll {
+	overflow-x: auto;
+	max-width: 100%;
+}
+
+.bases-row-deltas .brd-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.bases-row-deltas .brd-table caption {
+	text-align: left;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	padding-bottom: var(--size-4-2);
+}
+
+.bases-row-deltas .brd-table th,
+.bases-row-deltas .brd-table td {
+	padding: var(--size-4-2) var(--size-4-3);
+	border-bottom: 1px solid var(--background-modifier-border);
+	white-space: nowrap;
+	text-align: right;
+}
+
+.bases-row-deltas .brd-table th { background: var(--background-secondary); }
+
+.bases-row-deltas .brd-table th:first-child,
+.bases-row-deltas .brd-table td:first-child {
+	text-align: left;
+	min-width: 160px;
+}
+.bases-row-deltas .brd-number { font-variant-numeric: tabular-nums; }

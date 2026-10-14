@@ -1,0 +1,1605 @@
+{
+ "slug": "bases-row-deltas",
+ "module": "bases-row-deltas/src/model",
+ "function": "compareGroups",
+ "cases": [
+  {
+   "name": "01 Values 10 13 9",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        13
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        9
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 13,
+        "prior": 10,
+        "difference": 3,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": 9,
+        "prior": 13,
+        "difference": -4,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "02 Groups reset the prior row",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        13
+       ],
+       "date": null
+      }
+     ],
+     [
+      {
+       "path": "1-0.md",
+       "name": "1-0",
+       "values": [
+        100
+       ],
+       "date": null
+      },
+      {
+       "path": "1-1.md",
+       "name": "1-1",
+       "values": [
+        90
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 13,
+        "prior": 10,
+        "difference": 3,
+        "perDay": null
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "path": "1-0.md",
+      "name": "1-0",
+      "cells": [
+       {
+        "current": 100,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "1-1.md",
+      "name": "1-1",
+      "cells": [
+       {
+        "current": 90,
+        "prior": 100,
+        "difference": -10,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "03 Missing rows are not skipped",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        null
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        14
+       ],
+       "date": null
+      },
+      {
+       "path": "0-3.md",
+       "name": "0-3",
+       "values": [
+        15
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": null,
+        "prior": 10,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": 14,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-3.md",
+      "name": "0-3",
+      "cells": [
+       {
+        "current": 15,
+        "prior": 14,
+        "difference": 1,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "04 Zero and negative numbers",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        0
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        0
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        -2
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 0,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 0,
+        "prior": 0,
+        "difference": 0,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": -2,
+        "prior": 0,
+        "difference": -2,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "05 Numeric text is invalid",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        "12"
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        15
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": null,
+        "prior": 10,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": 15,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "06 Changed order replaces differences",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        9
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        13
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        10
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 9,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 13,
+        "prior": 9,
+        "difference": 4,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": 10,
+        "prior": 13,
+        "difference": -3,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "07 Equal sort keys keep B before A",
+   "args": [
+    [
+     [
+      {
+       "path": "B.md",
+       "name": "B",
+       "values": [
+        13
+       ],
+       "date": null
+      },
+      {
+       "path": "A.md",
+       "name": "A",
+       "values": [
+        10
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "B.md",
+      "name": "B",
+      "cells": [
+       {
+        "current": 13,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "A.md",
+      "name": "A",
+      "cells": [
+       {
+        "current": 10,
+        "prior": 13,
+        "difference": -3,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "08 A limit removes the earlier row",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        13
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        9
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 13,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 9,
+        "prior": 13,
+        "difference": -4,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "09 New evaluated formula values replace old values",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        20
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        28
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 20,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 28,
+        "prior": 20,
+        "difference": 8,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "10 Note paths keep links distinct at a narrow width",
+   "args": [
+    [
+     [
+      {
+       "path": "North/Reading.md",
+       "name": "North/Reading",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "South/Reading.md",
+       "name": "South/Reading",
+       "values": [
+        13
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "North/Reading.md",
+      "name": "North/Reading",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "South/Reading.md",
+      "name": "South/Reading",
+      "cells": [
+       {
+        "current": 13,
+        "prior": 10,
+        "difference": 3,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "11 Empty result set",
+   "args": [
+    [],
+    1
+   ],
+   "expected": []
+  },
+  {
+   "name": "12 Empty supplied group",
+   "args": [
+    [
+     []
+    ],
+    1
+   ],
+   "expected": [
+    []
+   ]
+  },
+  {
+   "name": "13 One row has no pair",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        7
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 7,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "14 Offset two",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        13
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        9
+       ],
+       "date": null
+      },
+      {
+       "path": "0-3.md",
+       "name": "0-3",
+       "values": [
+        17
+       ],
+       "date": null
+      }
+     ]
+    ],
+    2
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 13,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": 9,
+        "prior": 10,
+        "difference": -1,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-3.md",
+      "name": "0-3",
+      "cells": [
+       {
+        "current": 17,
+        "prior": 13,
+        "difference": 4,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "15 Offset greater than group length",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        13
+       ],
+       "date": null
+      }
+     ]
+    ],
+    100
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 13,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "16 Offset two does not cross groups",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        13
+       ],
+       "date": null
+      }
+     ],
+     [
+      {
+       "path": "1-0.md",
+       "name": "1-0",
+       "values": [
+        100
+       ],
+       "date": null
+      },
+      {
+       "path": "1-1.md",
+       "name": "1-1",
+       "values": [
+        90
+       ],
+       "date": null
+      },
+      {
+       "path": "1-2.md",
+       "name": "1-2",
+       "values": [
+        85
+       ],
+       "date": null
+      }
+     ]
+    ],
+    2
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 13,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "path": "1-0.md",
+      "name": "1-0",
+      "cells": [
+       {
+        "current": 100,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "1-1.md",
+      "name": "1-1",
+      "cells": [
+       {
+        "current": 90,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "1-2.md",
+      "name": "1-2",
+      "cells": [
+       {
+        "current": 85,
+        "prior": 100,
+        "difference": -15,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "17 Boolean is invalid",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        true
+       ],
+       "date": null
+      },
+      {
+       "path": "0-2.md",
+       "name": "0-2",
+       "values": [
+        15
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": null,
+        "prior": 10,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-2.md",
+      "name": "0-2",
+      "cells": [
+       {
+        "current": 15,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "18 Equal values have zero difference",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        5
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        5
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 5,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 5,
+        "prior": 5,
+        "difference": 0,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "19 Decimal values",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        1.5
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        2.25
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 1.5,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 2.25,
+        "prior": 1.5,
+        "difference": 0.75,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "20 Positive date interval",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": 0
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        16
+       ],
+       "date": 172800000
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 16,
+        "prior": 10,
+        "difference": 6,
+        "perDay": 3
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "21 Equal dates have no rate",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": 0
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        16
+       ],
+       "date": 0
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 16,
+        "prior": 10,
+        "difference": 6,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "22 Reversed dates have no rate",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": 172800000
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        16
+       ],
+       "date": 0
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 16,
+        "prior": 10,
+        "difference": 6,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "23 Missing date has no rate",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": null
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        16
+       ],
+       "date": 172800000
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 16,
+        "prior": 10,
+        "difference": 6,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "24 Fractional day interval",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": 0
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        16
+       ],
+       "date": 43200000
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": 16,
+        "prior": 10,
+        "difference": 6,
+        "perDay": 12
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "25 Invalid current number leaves rate empty",
+   "args": [
+    [
+     [
+      {
+       "path": "0-0.md",
+       "name": "0-0",
+       "values": [
+        10
+       ],
+       "date": 0
+      },
+      {
+       "path": "0-1.md",
+       "name": "0-1",
+       "values": [
+        null
+       ],
+       "date": 86400000
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "0-0.md",
+      "name": "0-0",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "0-1.md",
+      "name": "0-1",
+      "cells": [
+       {
+        "current": null,
+        "prior": 10,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "name": "26 Several properties compare independently",
+   "args": [
+    [
+     [
+      {
+       "path": "A.md",
+       "name": "A",
+       "values": [
+        10,
+        100
+       ],
+       "date": null
+      },
+      {
+       "path": "B.md",
+       "name": "B",
+       "values": [
+        13,
+        90
+       ],
+       "date": null
+      }
+     ]
+    ],
+    1
+   ],
+   "expected": [
+    [
+     {
+      "path": "A.md",
+      "name": "A",
+      "cells": [
+       {
+        "current": 10,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       },
+       {
+        "current": 100,
+        "prior": null,
+        "difference": null,
+        "perDay": null
+       }
+      ]
+     },
+     {
+      "path": "B.md",
+      "name": "B",
+      "cells": [
+       {
+        "current": 13,
+        "prior": 10,
+        "difference": 3,
+        "perDay": null
+       },
+       {
+        "current": 90,
+        "prior": 100,
+        "difference": -10,
+        "perDay": null
+       }
+      ]
+     }
+    ]
+   ]
+  }
+ ]
+}

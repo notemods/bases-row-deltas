@@ -1,0 +1,107 @@
+[
+	{
+		"feature": "numbers",
+		"caption": "The Numbers sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Numbers','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Numbers\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "groups",
+		"caption": "The Groups sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Groups','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Groups\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===5) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "gaps",
+		"caption": "The Gaps sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Gaps','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Gaps\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===4) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "formula",
+		"caption": "The Formula sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Formula','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Formula\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "limited",
+		"caption": "The Limited sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Limited','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Limited\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===2) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "several",
+		"caption": "The Several sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-row-deltas-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Several','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Several\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "offset",
+		"caption": "The Offset sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-row-deltas-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Offset','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Offset\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "per-day",
+		"caption": "The Per day sample view shows the reading comparisons.",
+		"note": "Readings.base",
+		"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-row-deltas-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Per day','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Per day\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+		"wait": 400,
+		"after": "app.plugins.plugins['bases-row-deltas'].pro.signOut(); 'ok'"
+	},
+	{
+		"feature": "bases-row-deltas",
+		"caption": "Switch between reading comparisons, formula values, and Pro options.",
+		"frames": [
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Numbers','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Numbers\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			},
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Groups','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Groups\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===5) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			},
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Formula','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Formula\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			},
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-row-deltas-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Several','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Several\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			},
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-row-deltas-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Offset','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Offset\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			},
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-row-deltas-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Per day','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Per day\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			},
+			{
+				"note": "Readings.base",
+				"eval": "(async()=>{const p=app.plugins.plugins['bases-row-deltas']; p.pro.signOut(); await app.workspace.openLinkText('Bases Row Deltas/Readings.base#Numbers','',false); for(let i=0;i<100;i++){ const v=[...p.views].filter(v=>v.containerEl.isConnected && v.containerEl.offsetParent!==null && v.containerEl.dataset.brdView===\"Numbers\").pop(); if(v && v.containerEl.querySelectorAll('tbody tr').length===3) return 'ready'; await new Promise(r=>setTimeout(r,100)); } throw new Error('Sample rows did not render');})()",
+				"hold": 1300
+			}
+		]
+	}
+]
