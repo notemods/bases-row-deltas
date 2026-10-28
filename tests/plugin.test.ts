@@ -1,8 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
+// The shared Pro notice is a spy here; the e2e test checks the real notice and its Sponsor on GitHub button.
+const { showProNotice } = vi.hoisted(() => ({ showProNotice: vi.fn() }));
+vi.mock('../src/license/github-obsidian', async (importOriginal) => ({ ...(await importOriginal<object>()), showProNotice }));
 import { App, BooleanValue, DateValue, NumberValue, StringValue } from 'obsidian-test-mocks/obsidian';
 import BasesRowDeltasPlugin from '../src/main';
 import { bindPro, isPro, onProChange, resetPro, SPONSORS } from '../src/pro';
-import { KEY, readDate, readNumber, RowDeltasView, viewOptions } from '../src/view';
+import { KEY, PRO_LEAD, readDate, readNumber, RowDeltasView, viewOptions } from '../src/view';
 import { compareGroups, priorOffset, RESULT_NOTICE, validNumber } from '../src/model';
 import manifest from '../manifest.json';
 import { BasesRowDeltasSettingTab } from '../src/settings';
@@ -12,11 +16,12 @@ afterEach(() => { for (const v of openViews.splice(0)) v.unload(); resetPro(); v
 function manager(start: boolean) {
 	let pro = start;
 	const listeners = new Set<() => void>();
-	return { isPro: () => pro, onChange: (cb: () => void) => { listeners.add(cb); return () => { listeners.delete(cb); }; }, set: (value: boolean) => { pro = value; for (const cb of listeners) cb(); } };
+	// getState, hasToken, isChecking and config serve the shared Pro notice (proNoticeKind, sponsorUrl).
+	return { isPro: () => pro, getState: () => ({ status: pro ? 'pro' : 'unchecked', lastAttemptAt: 1 }), hasToken: () => false, isChecking: () => false, config: SPONSORS, onChange: (cb: () => void) => { listeners.add(cb); return () => { listeners.delete(cb); }; }, set: (value: boolean) => { pro = value; for (const cb of listeners) cb(); } };
 }
-function view(values: unknown[][] = [[10,13,9]]) {
+function view(values: unknown[][] = [[10,13,9]], shared?: BasesRowDeltasPlugin) {
 	const app = App.createConfigured__();
-	const plugin = new BasesRowDeltasPlugin(app as never, manifest as never);
+	const plugin = shared ?? new BasesRowDeltasPlugin(app as never, manifest as never);
 	const parent = document.createElement('div');
 	const v = new RowDeltasView({} as never, parent, plugin);
 	openViews.push(v);
@@ -105,6 +110,37 @@ describe('view rendering', () => {
 		m.set(false);
 		expect(x.cells()[2]).toEqual(['Row 2','16','13','3']);
 	});
+	it('shows the Pro notice once for each new Pro selection of a free user, not on each data update', () => {
+		bindPro(manager(false) as never);
+		const x = view([[10,13,16]]);
+		showProNotice.mockClear();
+		x.v.onDataUpdated();
+		expect(showProNotice).not.toHaveBeenCalled();
+		x.v.config.set(KEY.second,'note.other'); x.v.onDataUpdated();
+		expect(showProNotice).toHaveBeenCalledTimes(1);
+		expect(showProNotice.mock.calls[0]![1]).toBe(PRO_LEAD);
+		x.v.onDataUpdated(); x.v.onDataUpdated();
+		expect(showProNotice).toHaveBeenCalledTimes(1);
+		x.v.config.set(KEY.offset,2); x.v.onDataUpdated();
+		expect(showProNotice).toHaveBeenCalledTimes(2);
+	});
+	it('shows one Pro notice for three copies of the same view with the same Pro options', () => {
+		bindPro(manager(false) as never);
+		const first = view([[10,13,16]]);
+		showProNotice.mockClear();
+		for (const x of [first, view([[10,13,16]], first.plugin), view([[10,13,16]], first.plugin)]) {
+			x.v.config.set(KEY.second,'note.other'); x.v.onDataUpdated(); x.v.onDataUpdated();
+			expect(x.v.containerEl.textContent).toContain('Pro options are saved');
+		}
+		expect(showProNotice).toHaveBeenCalledTimes(1);
+	});
+	it('shows no Pro notice to a Pro user', () => {
+		bindPro(manager(true) as never);
+		const x = view([[10,13,16]]);
+		showProNotice.mockClear();
+		x.v.config.set(KEY.second,'note.other'); x.v.onDataUpdated();
+		expect(showProNotice).not.toHaveBeenCalled();
+	});
 	it('deduplicates selected properties and removes the view on unload', () => {
 		bindPro(manager(true) as never);
 		const x = view(); x.v.config.set(KEY.second,'note.amount'); x.v.onDataUpdated();
@@ -184,7 +220,8 @@ describe('review regressions', () => {
 		plugin.load();
 		try {
 			const tab = new BasesRowDeltasSettingTab(app as never, plugin);
-			expect(tab.getSettingDefinitions().some((item) => 'heading' in item)).toBe(false);
+			// The product rows have no heading. The shared "More from NoteMods" card after them has its own heading.
+			expect(tab.productSettingDefinitions().some((item) => 'heading' in item)).toBe(false);
 		} finally { plugin.unload(); }
 	});
 });

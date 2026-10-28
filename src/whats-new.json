@@ -1,0 +1,27 @@
+{
+	"id": "bases-row-deltas",
+	"name": "Bases Row Deltas",
+	"version": "1.0.1",
+	"changes": [
+		"A Row deltas view with Pro options now shows free users a notice with a Sponsor on GitHub button."
+	],
+	"tip": "Group the base by a property, such as a meter, so that each group starts its own comparison.",
+	"thanks": "Hi, I am Michael, a solo developer in Poland. Bases Row Deltas is one of over 100 small plugins that I make. Thank you for using it with Bases. Bases is still new, and your setups teach me a lot.",
+	"related": [
+		{
+			"id": "bases-filter-switches",
+			"name": "Bases Filter Switches",
+			"blurb": "Turn saved Bases filters on or off with switches."
+		},
+		{
+			"id": "bases-link-graph",
+			"name": "Bases Link Graph",
+			"blurb": "See the notes and links from a filtered base as a graph."
+		},
+		{
+			"id": "bases-freeze-panes",
+			"name": "Bases Freeze Panes",
+			"blurb": "Keep column and note names visible as you scroll a base."
+		}
+	]
+}

@@ -1,7 +1,6 @@
 {
 	"name": "bases-row-deltas",
-	"repository": {"type": "git", "url": "theluckystrike/bases-row-deltas.git"},
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"private": true,
 	"description": "Show each number value and its change from the prior row in each Bases group.",
 	"main": "main.js",

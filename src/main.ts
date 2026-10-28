@@ -4,11 +4,17 @@ import { createGitHubSponsors } from './license/github-obsidian';
 import { bindPro, resetPro, SPONSORS } from './pro';
 import { BasesRowDeltasSettingTab } from './settings';
 import { RowDeltasView, VIEW_ID, viewOptions } from './view';
+import { setupHello } from './hello/index';
+import WHATS_NEW from './whats-new.json';
 
 export default class BasesRowDeltasPlugin extends Plugin {
 	pro: SponsorsManager | null = null;
 	readonly views = new Set<RowDeltasView>();
+	/** Keys of the Pro notices shown in this session (view name and saved Pro options), see RowDeltasView. */
+	readonly proNoticesShown = new Set<string>();
 	onload(): void {
+		// First: "What's new" reads its state before the settings load (packages/hello). It does not wait.
+		setupHello(this, WHATS_NEW);
 		let active = true;
 		this.register(() => { active = false; });
 		const pro = createGitHubSponsors(this.app, this.manifest.id, SPONSORS, this);

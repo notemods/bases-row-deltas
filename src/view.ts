@@ -1,9 +1,10 @@
 import { BasesView, DateValue, NumberValue, type BasesAllOptions, type BasesPropertyId, type BasesViewConfig, type QueryController, type Value } from 'obsidian';
 import { compareGroups, priorOffset, RESULT_NOTICE, validNumber } from './model';
-import { isPro, onProChange } from './pro';
+import { isPro, onProChange, proNotice } from './pro';
 import type BasesRowDeltasPlugin from './main';
 
 export const VIEW_ID = 'bases-row-deltas';
+export const PRO_LEAD = 'Second and third properties, row offsets and change per day are Pro features.';
 export const KEY = { number: 'deltaNumber', second: 'deltaSecond', third: 'deltaThird', offset: 'deltaOffset', date: 'deltaDate' } as const;
 export function viewOptions(_config: BasesViewConfig): BasesAllOptions[] {
 	return [
@@ -29,8 +30,10 @@ export function readDate(value: Value | null): number | null {
 export class RowDeltasView extends BasesView {
 	type = VIEW_ID;
 	readonly containerEl: HTMLElement;
+	private readonly plugin: BasesRowDeltasPlugin;
 	constructor(controller: QueryController, containerEl: HTMLElement, plugin: BasesRowDeltasPlugin) {
 		super(controller);
+		this.plugin = plugin;
 		containerEl.querySelectorAll('.brd-stale').forEach((el) => el.remove());
 		this.containerEl = containerEl.createDiv({ cls: 'bases-row-deltas' });
 		this.registerDomEvent(this.containerEl, 'click', (event) => {
@@ -65,6 +68,13 @@ export class RowDeltasView extends BasesView {
 		this.containerEl.createEl('p', { text: `${this.config.getDisplayName(primary)}: compare with ${offset === 1 ? 'the prior row' : `${offset} rows earlier`} in each group.`, cls: 'brd-summary' });
 		if (!pro && (extra.some(Boolean) || this.config.getAsPropertyId(KEY.date) || priorOffset(this.config.get(KEY.offset), true) > 1)) {
 			this.containerEl.createEl('p', { text: 'Pro options are saved. The free view uses one number property and the prior row.', cls: 'brd-pro-note' });
+			// The shared notice shows once in a session for each view name and Pro selection. The key is kept in the
+			// plugin, so a new copy of the view (new tab, restored tab, embed) and new data do not show it again.
+			const key = JSON.stringify([this.config.name, ...extra, this.config.getAsPropertyId(KEY.date), priorOffset(this.config.get(KEY.offset), true)]);
+			if (!this.plugin.proNoticesShown.has(key)) {
+				this.plugin.proNoticesShown.add(key);
+				proNotice(PRO_LEAD);
+			}
 		}
 		const groups = this.data.groupedData;
 		const rows = compareGroups(groups.map((g) => g.entries.map((entry) => ({

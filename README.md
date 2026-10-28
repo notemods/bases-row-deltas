@@ -68,7 +68,9 @@ To open a note, select its link. Ctrl-click or Cmd-click requests a new tab. You
 
 ## Settings
 
-The view options are saved by Bases in the base file. "Number property" is free. "Second number property", "Third number property", "Prior-row offset", and "Date property for change per day" are Pro options. The default offset is one row. When Pro is off, the saved Pro options are ignored and a note explains the free comparison.
+After a minor or major update, this plugin opens one What's new tab in the background. The tab and settings card suggest other NoteMods plugins and Zovo Chat and link to notemods.com for feedback ([privacy](https://notemods.com/privacy/)). The tab sends no data. Turn the tab off in Settings.
+
+The view options are saved by Bases in the base file. "Number property" is free. "Second number property", "Third number property", "Prior-row offset", and "Date property for change per day" are Pro options. The default offset is one row. When Pro is off, the saved Pro options are ignored and a note explains the free comparison. A notice with a Sponsor on GitHub button shows one time in a session for each view name and Pro selection. New data, a new tab of the same view, and an embed of the same view do not show it again.
 
 The plugin settings tab contains the GitHub Sponsors sign-in controls, sponsorship status, Refresh, and Sign out. It has no precision or color controls. Values use their numeric string representation, so decimal arithmetic can show a long fraction.
 
