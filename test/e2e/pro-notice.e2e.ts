@@ -3,7 +3,7 @@ import { obsidianPage } from 'wdio-obsidian-service';
 import { pluginId } from './load';
 
 // A free user opens a Row deltas view with saved Pro options (Second and Third number property). The shared Pro notice
-// must show once, with a Sponsor on GitHub button that opens the Sponsors page with metadata_source=<plugin id>.
+// must show once, with a Sponsor on GitHub button that opens the one-time tab of the Sponsors page with metadata_source=<plugin id>.
 const BASE = 'Bases Row Deltas/Readings.base';
 const NOTE = 'Bases Row Deltas/Notes/North 02.md';
 const LEAD = 'Second and third properties, row offsets and change per day are Pro features.';
@@ -73,7 +73,7 @@ describe(`${pluginId} Pro notice`, function () {
 			}
 			return opened;
 		});
-		expect(url).toBe(`https://github.com/sponsors/theluckystrike?metadata_source=${pluginId}`);
+		expect(url).toBe(`https://github.com/sponsors/theluckystrike?frequency=one-time&metadata_source=${pluginId}`);
 	});
 
 	it('does not show the notice again when Bases sends new data for the same options', async function () {

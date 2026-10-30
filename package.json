@@ -1,6 +1,6 @@
 {
 	"name": "bases-row-deltas",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"private": true,
 	"description": "Show each number value and its change from the prior row in each Bases group.",
 	"main": "main.js",
